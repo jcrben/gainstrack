@@ -10,9 +10,10 @@
 const { configure } = require('quasar/wrappers')
 const {reduce} = require('lodash');
 const pathsToProxy = ['/api', '/gainstrack', '/functions'];
+const proxyTarget = process.env.GAINSTRACK_API_TARGET || 'https://poc.gainstrack.com';
 const proxyProxyConfig = reduce(
   pathsToProxy,
-  (obj, path) => ({ ...obj, [path]: { target: 'https://poc.gainstrack.com', changeOrigin:true, secure:false } }),
+  (obj, path) => ({ ...obj, [path]: { target: proxyTarget, changeOrigin:true, secure:false } }),
   {}
 );
 
